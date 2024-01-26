@@ -1,23 +1,10 @@
 
 // File: SlidingWindow.c
-// Date: 18 Janurary 2023
+// Date: 18 Janurary 2024
 // Author: TQ Smith
 // Purpose: Slides a window along the contents of a VCF file.
 
 #include "SlidingWindow.h"
-
-Window* init_window() {
-    // Allocate the structure.
-    Window* window = (Window*) calloc(1, sizeof(Window));
-    // Set default numbering.
-    window -> windowNum = 1;
-    window -> windowNumOnChromosome = 1;
-    window -> numLoci = 0;
-    // Allocate string for chromosome.
-    window -> chromosome = (kstring_t*) calloc(1, sizeof(kstring_t));
-    // Return window.
-    return window;
-}
 
 // A method to get the next window in sliding process.
 // Accepts:
@@ -129,18 +116,6 @@ klist_t(WindowPtr)* slide_through_genome(VCFGenotypeParser* parser, HaplotypeEnc
     // Return the structure.
     return windows;
 
-}
-
-void destroy_window(Window* window) {
-    // Cannot destroy a NULL window.
-    if (window == NULL)
-        return;
-
-    // Free the chromosome string.
-    free(ks_str(window -> chromosome)); free(window -> chromosome);
-
-    // Free the structure.
-    free(window);
 }
 
 // Used to test sliding window.
